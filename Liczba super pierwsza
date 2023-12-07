@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool CzyPierwsza(int n)
+{
+    if (n < 2) return false;
+    else
+    {
+        for (int i = 2; i * i <= n; i++)
+        {
+            if (n % i == 0) return false;
+        }
+    }
+    return true;
+}
+
+int Suma(int n)
+{
+    string str = to_string(n);
+    int suma = 0;
+    for (int i = 0; i < str.size(); i++)
+    {
+        int t = str[i] - 48;
+        suma += t;
+    }
+    return suma;
+}
+
+bool CzySuperpierwsza(int n)
+{
+    if (CzyPierwsza(n) && CzyPierwsza(Suma(n))) return true;
+    else return false;
+}
+
+int main()
+{
+    int n;
+    cout << "Podaj liczbę: ";
+    cin >> n;
+    cout << CzySuperpierwsza(n) << endl;
+    return 0;
+}
