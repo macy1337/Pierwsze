@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void Generuj(int T[], int n)
+{
+    int i, m;
+    for (i = 2; i <= n; i++)
+    {
+        T[i] = 1;
+    }
+    i = 2;
+    while (i <= n)
+    {
+        m = 2 * i;
+        while (m <= n)
+        {
+            T[m] = 0;
+            m += i;
+        }
+        do i++; while (T[i] == 0 and i <= n);
+    }
+}
+
+void Pokaz(int T[], int n)
+{
+    for (int i = 0; i <= n; i++)
+    {
+        if (T[i] == 1)
+        {
+            cout << "T[" << i << "]=" << T[i] << endl;
+        }
+    }
+}
+
+int main()
+{
+    int T[1000];
+    int n;
+    cout << "Podaj liczbę: ";
+    cin >> n;
+    Generuj(T, n);
+    Pokaz(T, n);
+    return 0;
+}
