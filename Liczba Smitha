@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool CzyPierwsza(int n)
+{
+    if (n < 2) return false;
+    else
+    {
+        for (int i = 2; i * i <= n; i++)
+        {
+            if (n % i == 0) return false;
+        }
+    }
+    return true;
+}
+
+int SumaLiczby(int n)
+{
+    string str = to_string(n);
+    int suma = 0;
+    for (int i = 0; i < str.size(); i++)
+    {
+        int t = str[i] - 48;
+        suma += t;
+    }
+    return suma;
+}
+
+string Czynniki(int n)
+{
+    int dzielnik = 2;
+    string czynniki;
+    while (n >= dzielnik)
+    {
+        while (n % dzielnik == 0)
+        {
+            string str = to_string(dzielnik);
+            czynniki += str;
+            n /= dzielnik;
+        }
+        dzielnik++;
+    }
+    return czynniki;
+}
+
+int SumaCzynnikow(int n)
+{
+    string str = Czynniki(n);
+    int suma = 0;
+    for (int i = 0; i < str.size(); i++)
+    {
+        int t = str[i] - 48;
+        suma += t;
+    }
+    return suma;
+}
+
+bool CzySmith(int n)
+{
+    if (!CzyPierwsza(n) && SumaLiczby(n) == SumaCzynnikow(n)) return true;
+    else return false;
+}
+
+int main()
+{
+    int T[1000];
+    int n;
+    cout << "Podaj liczbę: ";
+    cin >> n;
+    cout << CzySmith(n) << endl;
+    return 0;
+}
